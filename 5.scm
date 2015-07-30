@@ -1,0 +1,7 @@
+(define (cal x y)
+  (cond ((or (= y 1) (= y x)) 1) 
+        ((or (> y x) (< y 1)) 0)
+        (else (+ (cal (- x 1) (- y 1)) (cal (- x 1) y)))
+        )
+  )
+(display (cal 5 3))

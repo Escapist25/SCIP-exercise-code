@@ -1,0 +1,8 @@
+(define (make-accumulator value)
+  (lambda (x)
+    (set! value (+ value x))
+    value))
+(define A (make-accumulator 5))
+(a 10)
+(define B (make-accumulator 5))
+(b 10)

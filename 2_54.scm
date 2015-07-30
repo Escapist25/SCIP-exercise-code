@@ -1,0 +1,10 @@
+(define (equal1? a b) 
+  (cond ((and (not (pair? a))
+              (not (pair? b)))
+         (eq? a b)) 
+        ((and (pair? a) (pair? b))
+         (and (equal1? (car a) (car b))
+              (equal1? (cdr a) (cdr b))))
+        (else #f)))
+
+(equal1? `(1 2 3) `(1 2 3))

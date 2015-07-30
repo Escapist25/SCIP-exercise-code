@@ -1,0 +1,21 @@
+(define (is-in-circle? point)
+  (<= (+ (sqr (car point)) (sqr (cdr point))) 1))
+(define (monte-carlo trials experiment)
+  (define (iter trials-remaining trials-passed)
+    (cond ((= trials-remaining 0)
+           (/ trials-passed trials))
+          ((experiment) 
+           (iter (- trials-remaining 1) (+ trials-passed 1)))
+          (else
+            (iter (- trials-remaining 1) trials-passed))))
+  (iter trials 0))
+(define (random-in-range low high) 
+  (let ((range (- high low)))
+   (+ (random range) low)))
+
+(define (in-circle-test)
+  (is-in-circle? (cons (random-in-range -1.0 1.0) (random-in-range -1.0 1.0)))
+  )
+(define (estimate-pi)
+  (* 4 (monte-carlo 1000 in-circle-test)))
+

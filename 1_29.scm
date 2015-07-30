@@ -1,0 +1,26 @@
+(define (sum term a next b)
+  (if (> a b)
+    0
+    (+ (term a)
+       (sum term (next a) next b)
+       )
+    )
+  ) 
+(define (mul2 x) (* x 2))
+(define (mul4 x) (* x 4))
+
+(define (simpson term a b n)
+  (define h (/ (- b a) n))
+  (define (inc x) (+ x h))
+  (define (inc2 x) (+ x (* 2 h)))
+  (* h (/ 1 3)
+    (+ 
+    (term a) 
+    (- (term b)) 
+    (mul4 (sum term (inc a) inc2 b)) 
+    (mul2 (sum term (inc2 a) inc2 b)))
+     )
+  )
+
+(define (cube x) (* x x x))
+(simpson cube 1 100 50000)

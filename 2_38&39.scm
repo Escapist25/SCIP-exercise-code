@@ -1,0 +1,23 @@
+(define (f-right op initial sequence)
+  (if (null? sequence)
+    initial
+    (op (car sequence) (f-right op initial (cdr sequence)))))
+(define (f-left op initial sequence)
+  (define (iter op result rest)
+    (if (null? rest) 
+      result
+      (iter op (op result (car rest)) 
+            (cdr rest))))
+  (iter op initial sequence))
+(f-right / 1 (list 1 2 3))
+(f-left / 1 (list 1 2 3))
+(f-right list nil (list 1 2 3))
+(f-left list nil (list 1 2 3))
+
+(define a `(1 2 3 4 5 6 7))
+(define (reverse1 sequence)
+  (f-right (lambda (x y) (append y (list x))) nil sequence))
+(define (reverse2 sequence)
+  (f-left (lambda (x y) (cons y x)) nil sequence))
+(reverse1 a)
+(reverse2 a)

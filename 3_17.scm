@@ -1,0 +1,27 @@
+(define (count-pairs x)
+  (define counted `())
+  (define (iter temp)
+    (if (not (pair? temp)) 
+      counted
+      (begin
+        (if (not (null? (memq temp counted))) 
+          (set! counted (cons temp counted)))
+        (iter (car temp))
+        (iter (cdr temp)))))
+  (iter x)
+  (length counted))
+(count-pairs `(1 2 4 (2 3 (5 6 (8))) (2 3)))
+(pair? `())
+(define t `(1 2 3))
+(define a (cons t t))
+(count-pairs a)
+
+(define (aaa) 
+  (display #\a)
+  (newline)
+  1
+  )
+(define a 0)
+(cond ((= a 0) 0)
+      (else (aaa)))
+(memq 2 `(1 2 3))
